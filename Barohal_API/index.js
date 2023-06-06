@@ -26,20 +26,20 @@ const Products = client.db("Barohal_Industry").collection('products')
 dbConnect();
 
 
-// app.get('products', async (req, res) => {
-// const cursor =  Products.find({});
-// const result = await cursor.toArray()
-// if(result ){
-//     res.send({
-//         success: true,
-//         data: result,
-//     });
-// } else {
-//     res.send({success: false, data:"no data founnd"});
-// }
-// })
+app.get('/products', async (req, res) => {
+const cursor =  Products.find({});
+const result = await cursor.toArray()
+if(result ){
+    res.send({
+        success: true,
+        data: result,
+    });
+} else {
+    res.send({success: false, data:"no data founnd"});
+}
+})
 
-app.post('/add-products', async(req, res) =>{
+app.post('/add-product', async(req, res) =>{
     try{
         const result = await Products.insertOne(req.body);
         if(result){
@@ -63,9 +63,9 @@ app.post('/add-products', async(req, res) =>{
 })
 
 app.get("/", (req, res) => {
-    res.send(`Welcome to Roza's flavor fusion`);
+    res.send(`Welcome to Barohal Industry Limited`);
   });
   
   app.listen(port, () => {
-    console.log(`Roza's flavor fusion server runing on port ${port}`);
+    console.log(`Barohal Industry Limited server runing on port ${port}`);
   });
