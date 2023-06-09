@@ -26,18 +26,20 @@ const Products = client.db("Barohal_Industry").collection('products')
 dbConnect();
 
 
-app.get('/products', async (req, res) => {
+app.get('/get-products', async (req, res) => {
 const cursor =  Products.find({});
-const result = await cursor.toArray()
-if(result ){
-    res.send({
-        success: true,
-        data: result,
-    });
-} else {
-    res.send({success: false, data:"no data founnd"});
-}
+const result = await cursor.toArray();
+res.send(result);
 })
+// if(result ){
+//     res.send({
+//         success: true,
+//         data: result,
+//     });
+// } else {
+//     res.send({success: false, data:"no data founnd"});
+// }
+// })
 
 app.post('/add-product', async(req, res) =>{
     try{
