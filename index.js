@@ -65,16 +65,10 @@ app.post('/add-product', async(req, res) =>{
       }
 })
 
-app.delete("/user-reviews/:id", async (req, res) => {
-  const reviewId = req.params.id;
-  const query = { _id: ObjectId(reviewId) };
-  const result = await Review.deleteOne(query);
-})
-
 app.delete('/products/:id', async (req, res) =>{
   const productId = req.params.id;
-  const query = {_id: ObjectId(productId)};
-  const result = await Products.deleteOne(productId);
+  const query = {_id: new ObjectId(productId)};
+  const result = await Products.deleteOne(query);
 })
 
 app.get("/", (req, res) => {
