@@ -27,10 +27,18 @@ const Products = client.db("Barohal_Industry").collection('products')
 dbConnect();
 
 
-app.get('/get-products', async (req, res) => {
+app.get('/products', async (req, res) => {
 const cursor =  Products.find({});
 const result = await cursor.toArray();
 res.send(result);
+})
+
+app.get('/product/:id',async (req, res) =>{
+  
+  const productId = req.params.id;
+  const query = {_id: new ObjectId(productId)};
+  const result = await Products.findOne(query);
+  res.send(result);
 })
 // if(result ){
 //     res.send({
@@ -65,7 +73,7 @@ app.post('/add-product', async(req, res) =>{
       }
 })
 
-app.delete('/products/:id', async (req, res) =>{
+app.delete('/delete-product/:id', async (req, res) =>{
   const productId = req.params.id;
   const query = {_id: new ObjectId(productId)};
   const result = await Products.deleteOne(query);
