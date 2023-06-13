@@ -78,6 +78,29 @@ app.delete('/delete-product/:id', async (req, res) =>{
   const query = {_id: new ObjectId(productId)};
   const result = await Products.deleteOne(query);
 })
+// const id = req.params.id;
+//   const filter = { _id: ObjectId(id) }
+//   console.log(id)
+//   const options = {upsert: true};
+//   const updateDoc = {
+//     $set:{
+//       verify: true
+//     }
+//   }
+//   const result = await usersCollection.updateOne(filter,updateDoc,options);
+//   res.send(result);
+app.patch('/update-product/:id', async (req, res)=>{
+  const productId = req.params.id;
+  console.log('patch ',productId)
+  const query = {_id: new ObjectId(productId)};
+  const options = {upsert: true};
+  const updateProduct = {
+    $set: req.body
+
+  }
+  const result = await Products.updateOne(query,updateProduct,options);
+  res.send(result);
+})
 
 app.get("/", (req, res) => {
     res.send(`Welcome to Barohal Industry Limited`);
