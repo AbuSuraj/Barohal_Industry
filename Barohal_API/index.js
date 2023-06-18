@@ -40,6 +40,15 @@ app.get('/product/:id',async (req, res) =>{
   const result = await Products.findOne(query);
   res.send(result);
 })
+
+app.get('/search-products/:category',async (req, res) =>{
+  const category  = req.params.category;
+   
+  const query = { categories: category};
+  const cursor = Products.find(query);
+  const result = await cursor.toArray();
+  res.send(result);
+})
  
 
 app.post('/add-product', async(req, res) =>{
