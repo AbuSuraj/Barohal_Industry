@@ -49,6 +49,14 @@ app.get('/search-products/:category',async (req, res) =>{
   const result = await cursor.toArray();
   res.send(result);
 })
+app.get('/search-products-by-name/:name',async (req, res) =>{
+  const category  = req.params.name;
+   
+  const query = { name: category};
+  const cursor = Products.find(query);
+  const result = await cursor.toArray();
+  res.send(result);
+})
  
 
 app.post('/add-product', async(req, res) =>{
